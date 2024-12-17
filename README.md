@@ -1,5 +1,9 @@
-#Smart Scheduler - AI-Powered Task Management System
+Smart Scheduler - AI-Powered Task Management System
+
+
 Overview
+
+
 Smart Scheduler is an intelligent task management system designed for students, leveraging machine learning to predict task completion times and optimize study schedules. The system uses a Random Forest Regressor to learn from user patterns and provide personalized time predictions.
 🚀 Features
 
