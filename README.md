@@ -1,11 +1,11 @@
-Smart Scheduler - AI-Powered Task Management System
+# Smart Scheduler - AI-Powered Task Management System
 
 
-Overview
+# Overview
 
 
 Smart Scheduler is an intelligent task management system designed for students, leveraging machine learning to predict task completion times and optimize study schedules. The system uses a Random Forest Regressor to learn from user patterns and provide personalized time predictions.
-🚀 Features
+# 🚀  Features
 
 AI-powered time predictions
 Personalized task management
@@ -15,7 +15,7 @@ Interactive schedule visualization
 Progress tracking
 Task difficulty analysis
 
-📋 Prerequisites
+# 📋 Prerequisites
 
 Python 3.11 or higher
 Flask
@@ -65,7 +65,7 @@ Copysmart_scheduler/
     ├── landing.html
     ├── add_task.html
     └── schedule.html
-🤖 Machine Learning Component
+# 🤖 Machine Learning Component
 The system uses a Random Forest Regressor model that considers:
 
 Course type
