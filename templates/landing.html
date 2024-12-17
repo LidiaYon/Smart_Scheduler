@@ -1,0 +1,158 @@
+<!-- templates/landing.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Scheduler - Intelligent Task Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold text-blue-600">
+                    Smart Scheduler
+                </div>
+                <div class="space-x-4">
+                    <a href="{{ url_for('login') }}" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                        Login
+                    </a>
+                    <a href="{{ url_for('register') }}" class="px-6 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50">
+                        Register
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-br from-blue-500 to-blue-700 text-white py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-5xl font-bold mb-6">Optimize Your Study Time with AI</h1>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">
+                Smart Scheduler uses machine learning to predict task completion times and help you manage your academic workload effectively.
+            </p>
+            <a href="{{ url_for('register') }}" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition duration-300">
+                Get Started Free
+            </a>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">Key Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Intelligent Predictions -->
+                <div class="text-center p-6 bg-white rounded-lg shadow-md">
+                    <div class="text-4xl text-blue-500 mb-4">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">AI-Powered Predictions</h3>
+                    <p class="text-gray-600">
+                        Get accurate predictions for task completion times based on your study patterns and task complexity.
+                    </p>
+                </div>
+
+                <!-- Smart Analytics -->
+                <div class="text-center p-6 bg-white rounded-lg shadow-md">
+                    <div class="text-4xl text-blue-500 mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Smart Analytics</h3>
+                    <p class="text-gray-600">
+                        Track your progress with detailed insights and visualizations of your study patterns and efficiency.
+                    </p>
+                </div>
+
+                <!-- Deadline Management -->
+                <div class="text-center p-6 bg-white rounded-lg shadow-md">
+                    <div class="text-4xl text-blue-500 mb-4">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Deadline Management</h3>
+                    <p class="text-gray-600">
+                        Stay on top of your deadlines with smart reminders and overdue tracking features.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works -->
+    <div class="bg-gray-100 py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">How It Works</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Step 1 -->
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mb-4">
+                        1
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Add Your Task</h3>
+                    <p class="text-center text-gray-600">Enter task details including course, type, and difficulty level.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mb-4">
+                        2
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Get Predictions</h3>
+                    <p class="text-center text-gray-600">Receive AI-powered predictions for completion time.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mb-4">
+                        3
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Track Progress</h3>
+                    <p class="text-center text-gray-600">Update actual completion times and track your efficiency.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mb-4">
+                        4
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Get Insights</h3>
+                    <p class="text-center text-gray-600">View analytics and improve your study patterns.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-8">Ready to Optimize Your Study Time?</h2>
+            <div class="space-x-4">
+                <a href="{{ url_for('register') }}" class="px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700">
+                    Create Free Account
+                </a>
+                <a href="{{ url_for('login') }}" class="px-8 py-3 border border-blue-600 text-blue-600 rounded-lg font-semibold hover:bg-blue-50">
+                    Sign In
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <div class="text-2xl font-bold mb-4">Smart Scheduler</div>
+                <p class="text-gray-400">Intelligent task management for students</p>
+                <div class="mt-6 text-gray-400">
+                    © 2024 Smart Scheduler. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

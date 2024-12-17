@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-4">Add New Task</h2>
+    <form id="taskForm" class="space-y-4">
+        <div>
+            <label class="block text-gray-700 mb-2">Course</label>
+            <select name="course" required class="w-full p-2 border rounded">
+                <option value="">Select a course or type a new one</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Physics">Physics</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="History">History</option>
+                <option value="Literature">Literature</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Biology">Biology</option>
+                <option value="Economics">Economics</option>
+                <option value="Python">Python</option>
+                <option value="Web Development">Web Development</option>
+                <option value="Data Science">Data Science</option>
+            </select>
+            <input type="text" name="custom_course" placeholder="Or type a custom course name" 
+                   class="w-full mt-2 p-2 border rounded">
+        </div>
+        
+        <div>
+            <label class="block text-gray-700 mb-2">Task Type</label>
+            <select name="task_type" required class="w-full p-2 border rounded">
+                <option value="Assignment">Assignment</option>
+                <option value="Project">Project</option>
+                <option value="Exam Preparation">Exam Preparation</option>
+                <option value="Quiz">Quiz</option>
+                <option value="Lab Report">Lab Report</option>
+                <option value="Homework">Homework</option>
+                <option value="Reading">Reading</option>
+            </select>
+        </div>
+        
+        <div>
+            <label class="block text-gray-700 mb-2">Difficulty (1-5)</label>
+            <input type="number" name="difficulty" min="1" max="5" required 
+                   class="w-full p-2 border rounded">
+        </div>
+        
+        <div>
+            <label class="block text-gray-700 mb-2">Available Time (hours)</label>
+            <input type="number" name="total_available_time" step="0.5" min="0.5" required 
+                   class="w-full p-2 border rounded">
+        </div>
+        
+        <div class="space-y-2">
+            <label class="block text-gray-700 mb-2">Deadline</label>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm text-gray-600">Date</label>
+                    <input type="date" name="due_date" required 
+                           class="w-full p-2 border rounded"
+                           min="{{ today }}">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-600">Time</label>
+                    <input type="time" name="due_time" required 
+                           class="w-full p-2 border rounded"
+                           value="23:59">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hidden field for deadline_days -->
+        <input type="hidden" name="deadline_days" id="deadline_days" value="1">
+        
+        <div id="deadlineInfo" class="text-sm text-gray-600 italic hidden">
+            Days until deadline: <span id="daysUntilDeadline"></span>
+        </div>
+        
+        <button type="submit" 
+                class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
+            Get Prediction
+        </button>
+    </form>
+    
+    <div id="prediction" class="mt-6 hidden">
+        <h3 class="text-xl font-bold mb-2">Predicted Study Time</h3>
+        <p class="text-lg"><span id="predictedTime"></span> hours</p>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    // Handle custom course input
+    $('select[name="course"]').change(function() {
+        if ($(this).val() === "") {
+            $('input[name="custom_course"]').show();
+        } else {
+            $('input[name="custom_course"]').hide();
+        }
+    });
+
+    // Calculate days until deadline when date or time changes
+    function updateDeadlineDays() {
+        const dueDate = new Date($('input[name="due_date"]').val() + 'T' + $('input[name="due_time"]').val());
+        const now = new Date();
+        
+        // Calculate the difference in days
+        const diffTime = dueDate - now;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        
+        // Update the hidden input and show the info
+        $('#deadline_days').val(Math.max(1, diffDays));
+        $('#daysUntilDeadline').text(Math.max(1, diffDays));
+        $('#deadlineInfo').removeClass('hidden');
+    }
+
+    $('input[name="due_date"], input[name="due_time"]').change(updateDeadlineDays);
+
+    $('#taskForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        let formData = new FormData(this);
+        
+        // If custom course is entered, use that instead of the select value
+        const customCourse = $('input[name="custom_course"]').val();
+        if (customCourse) {
+            formData.set('course', customCourse);
+        }
+        
+        $.ajax({
+            url: '/add_task',
+            method: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                $('#prediction').removeClass('hidden');
+                $('#predictedTime').text(response.predicted_time);
+                
+                // Add success message with link to schedule
+                const alert = $('<div class="mt-4 p-4 bg-green-100 text-green-700 rounded">')
+                    .text('Task added successfully! ')
+                    .append(
+                        $('<a class="underline">')
+                            .attr('href', '/schedule')
+                            .text('View Schedule')
+                    );
+                $('#prediction').append(alert);
+            },
+            error: function(xhr, status, error) {
+                alert('Error: ' + (xhr.responseJSON?.error || error));
+            }
+        });
+    });
+});
+</script>
+{% endblock %}
